@@ -24,7 +24,7 @@
                     <td>{{ pais.Idioma }}</td>
                     <td>
                         <button class="btn btn-secondary btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" @click="Eliminar(index)">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
@@ -47,8 +47,9 @@
             };
         },
         methods: {
-            
-        
+            Eliminar(index) {
+                this.paises.splice(index, 1);
+            },
         },
     };
     
