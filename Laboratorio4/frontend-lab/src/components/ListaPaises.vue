@@ -1,6 +1,15 @@
 <template>
     <div class="container mt-5">
         <h1 class="display-4 text-center"> Lista de Paises </h1>
+        <div class="row justify-content-end">
+            <div class="col-2">
+                <a href="/pais">
+                    <button type="button" class="btn btn-outline-secondary float-right">
+                        Agregar pais
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="container mt-5">
@@ -24,7 +33,7 @@
                     <td>{{ pais.Idioma }}</td>
                     <td>
                         <button class="btn btn-secondary btn-sm">Editar</button>
-                        <button class="btn btn-danger btn-sm" @click="Eliminar(index)">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" @click="eliminar(index)">Eliminar</button>
                     </td>
                 </tr>
             </tbody>
@@ -33,6 +42,7 @@
 </template>
 
 <script>
+    import axios from "axios";
     export default {
         name: 'ListaPaises',
         data() {
@@ -47,10 +57,20 @@
             };
         },
         methods: {
-            Eliminar(index) {
+            eliminar(index) {
                 this.paises.splice(index, 1);
             },
+            obtenerTareas() {
+                axios.get("https://localhost:7294/api/Paises").then(
+                (response) => {
+                    this.paises = response.data;
+                });
+            },
+            
         },
+        created: function () {
+                this.obtenerTareas();
+            },
     };
     
 </script>
